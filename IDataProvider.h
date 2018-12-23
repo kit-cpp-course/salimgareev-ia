@@ -7,26 +7,26 @@
 #include <iterator>
 #include <sstream>
 
-struct Data//cтруктура, содержит в себе n(количество X и Y), массивы Y и X
+struct Data//cС‚СЂСѓРєС‚СѓСЂР°, СЃРѕРґРµСЂР¶РёС‚ РІ СЃРµР±Рµ n(РєРѕР»РёС‡РµСЃС‚РІРѕ X Рё Y), РјР°СЃСЃРёРІС‹ Y Рё X
 {
 	int n{};
 	std::vector<int> MassX{};
 	std::vector<int> MassY{};
 };
-class IDataProvider//класс для структуры входных данных
+class IDataProvider//РєР»Р°СЃСЃ РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹ РІС…РѕРґРЅС‹С… РґР°РЅРЅС‹С…
 {
 public:
 	virtual Data GetData() const = 0;
 	virtual ~IDataProvider() = default;
 };
-class FileDataProvider : public IDataProvider//чтение данных из файла
+class FileDataProvider : public IDataProvider//С‡С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
 {
 private:
 	std::string _filename;
-	std::vector<int> LineToVector(std::ifstream & fileIn) const;//считывание строки в вектор
+	std::vector<int> LineToVector(std::ifstream & fileIn) const;//СЃС‡РёС‚С‹РІР°РЅРёРµ СЃС‚СЂРѕРєРё РІ РІРµРєС‚РѕСЂ
 public:
 	FileDataProvider(const std::string filename)
 		: _filename(filename) {};
-	Data GetData() const override;//функция для чтения с файла
+	Data GetData() const override;//С„СѓРЅРєС†РёСЏ РґР»СЏ С‡С‚РµРЅРёСЏ СЃ С„Р°Р№Р»Р°
 	
 };
