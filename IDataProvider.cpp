@@ -15,9 +15,9 @@ Data FileDataProvider::GetData() const
 		throw std::logic_error("Could not open file \n");
 	}
 	Data data;
-	fileIn >> data.n; fileIn.ignore();//˜ÚÂÌËÂ n
-	data.MassX = LineToVector(fileIn);//˜ÚÂÌËÂ Ï‡ÒÒË‚‡ X
-	data.MassY = LineToVector(fileIn);//˜ÚÂÌËÂ Ï‡ÒÒË‚‡ Y
+	fileIn >> data.n; fileIn.ignore();//—á—Ç–µ–Ω–∏–µ n
+	data.MassX = LineToVector(fileIn);//—á—Ç–µ–Ω–∏–µ –º–∞—Å—Å–∏–≤–∞ X
+	data.MassY = LineToVector(fileIn);//—á—Ç–µ–Ω–∏–µ –º–∞—Å—Å–∏–≤–∞ Y
 	if (data.n != data.MassX.size() || data.n != data.MassY.size())
 	{
 		throw std::logic_error("The amount of data entered does not correspond to n \n");
