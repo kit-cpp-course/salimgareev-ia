@@ -38,7 +38,7 @@ namespace CorrelationCoefficients {
 		float MassBas::CalculationFehner()
 		{
 			CountSign();
-			Fenh = float(nA - nB) / float(nA + nB);//формуля для вычисления коэффициента
+			Fenh = float(nA - nB) / float(nA + nB);//С„РѕСЂРјСѓР»СЏ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
 			return(Fenh);
 		}
 }
