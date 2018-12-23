@@ -7,16 +7,16 @@ namespace CorrelationCoefficients{
 	class MassBas {
 		const IDataProvider& dataProvider;
 		Data data = dataProvider.GetData();
-		float Fenh;//коэффициент
-		int nA, nB;//счетчики для определения совпадений знаков(A- совпадают, B - не совпадают)
-		char *MassSignX = new char[data.n];//массив со знаками X
-		char *MassSignY = new char[data.n];//массив со знаками X
-		float AveVal(std::vector<int> Mass) const; //среднее значение
-		char *DefinitionSign(std::vector<int> Mass, char *MassSign);//Определение знака, который зависит от отклонения среднего значения
-		int CountSign(); //определение количесва совпадающих и различающихся знаков
+		float Fenh;//РєРѕСЌС„С„РёС†РёРµРЅС‚
+		int nA, nB;//СЃС‡РµС‚С‡РёРєРё РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ СЃРѕРІРїР°РґРµРЅРёР№ Р·РЅР°РєРѕРІ(A- СЃРѕРІРїР°РґР°СЋС‚, B - РЅРµ СЃРѕРІРїР°РґР°СЋС‚)
+		char *MassSignX = new char[data.n];//РјР°СЃСЃРёРІ СЃРѕ Р·РЅР°РєР°РјРё X
+		char *MassSignY = new char[data.n];//РјР°СЃСЃРёРІ СЃРѕ Р·РЅР°РєР°РјРё Y
+		float AveVal(std::vector<int> Mass) const;//СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ
+		char *DefinitionSign(std::vector<int> Mass, char *MassSign);//РћРїСЂРµРґРµР»РµРЅРёРµ Р·РЅР°РєР°, РєРѕС‚РѕСЂС‹Р№ Р·Р°РІРёСЃРёС‚ РѕС‚ РѕС‚РєР»РѕРЅРµРЅРёСЏ СЃСЂРµРґРЅРµРіРѕ Р·РЅР°С‡РµРЅРёСЏ
+		int CountSign();//РѕРїСЂРµРґРµР»РµРЅРёРµ РєРѕР»РёС‡РµСЃРІР° СЃРѕРІРїР°РґР°СЋС‰РёС… Рё СЂР°Р·Р»РёС‡Р°СЋС‰РёС…СЃСЏ Р·РЅР°РєРѕРІ
 	public:
 		MassBas(const IDataProvider& dataProvider): dataProvider(dataProvider) {}
 		~MassBas() = default;
-		float CalculationFehner();//вычисление коэффициента			
+		float CalculationFehner();//РІС‹С‡РёСЃР»РµРЅРёРµ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°					
 	};
 }
