@@ -1,17 +1,22 @@
+/*
+*main.cpp
+*/
 #include <iostream>
 #include "MassBas.h"
 #include "IDataProvider.h"
+#include "FileNameProvider.h"
 
 using namespace std;
 using namespace  CorrelationCoefficients;
 
-int main()
+int main(int argc, char* argv[])
 {
-	IDataProvider & dataProvider = FileDataProvider("1.txt");
+	FileNameProvider FileName = FileNameProvider(argc, argv);
+	IDataProvider & dataProvider = FileDataProvider(FileName.GetInputFileName(), FileName.GetOutputFileName());
 	try
 	{
 		MassBas A{dataProvider};
-		cout << "The value of the coefficient Fechner: " << A.CalculationFehner() << endl;
+		dataProvider.PutData(A.CalculationFehner());
 	}
 	catch (const exception& ex)
 	{

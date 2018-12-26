@@ -1,11 +1,21 @@
+/*
+*MassBas.cpp
+*/
 #include "MassBas.h"
 
 namespace CorrelationCoefficients {
+	MassBas::MassBas(const IDataProvider& dataProvider) : dataProvider(dataProvider) {
+		data = dataProvider.GetData();
+		MassSignX = new char[data.n];
+		MassSignY = new char[data.n];
+	}
 		float MassBas::AveVal(std::vector<int> Mass) const 
 		{
 			int Summ = 0;
-			for (int i = 0; i < data.n;i++)
+			for (int i = 0; i < data.n;i++) 
+			{
 				Summ += Mass[i];
+			}
 			return Summ / data.n;
 		}
 		char *MassBas::DefinitionSign(std::vector<int> Mass, char *MassSign) 
@@ -13,10 +23,7 @@ namespace CorrelationCoefficients {
 			float AveValue = AveVal(Mass);
 			for (int i = 0; i < data.n; i++)
 			{
-				if (Mass[i] - AveValue > 0)
-					MassSign[i] = '+';
-				else
-					MassSign[i] = '-';
+				MassSign[i] = (Mass[i] - AveValue > 0) ? '+' : '-';
 			}
 			return MassSign;
 		}
@@ -28,10 +35,7 @@ namespace CorrelationCoefficients {
 			MassSignY = DefinitionSign(data.MassY, MassSignY);
 			for (int i = 0;i < data.n;i++)
 			{
-				if (MassSignX[i] == MassSignY[i])
-					nA++;
-				else
-					nB++;
+				(MassSignX[i] == MassSignY[i] ? nA : nB)++;
 			}
 			return 0;
 		}
@@ -39,6 +43,7 @@ namespace CorrelationCoefficients {
 		{
 			CountSign();
 			Fenh = float(nA - nB) / float(nA + nB);//формуля для вычисления коэффициента
+			
 			return(Fenh);
 		}
 }

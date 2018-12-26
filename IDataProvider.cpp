@@ -1,3 +1,6 @@
+/*
+*IDataProvider.cpp
+*/
 #include "IDataProvider.h"
 
 std::vector<int> FileDataProvider::LineToVector(std::ifstream & fileIn) const
@@ -9,18 +12,27 @@ std::vector<int> FileDataProvider::LineToVector(std::ifstream & fileIn) const
 }
 Data FileDataProvider::GetData() const
 {
-	std::ifstream fileIn(_filename);
+	std::ifstream fileIn(_InputFilename);
 	if (!fileIn.is_open())
 	{
 		throw std::logic_error("Could not open file \n");
 	}
 	Data data;
-	fileIn >> data.n; fileIn.ignore();//С‡С‚РµРЅРёРµ n
-	data.MassX = LineToVector(fileIn);//С‡С‚РµРЅРёРµ РјР°СЃСЃРёРІР° X
-	data.MassY = LineToVector(fileIn);//С‡С‚РµРЅРёРµ РјР°СЃСЃРёРІР° Y
+	fileIn >> data.n; fileIn.ignore();//чтение n
+	data.MassX = LineToVector(fileIn);//чтение массива X
+	data.MassY = LineToVector(fileIn);//чтение массива Y
 	if (data.n != data.MassX.size() || data.n != data.MassY.size())
 	{
 		throw std::logic_error("The amount of data entered does not correspond to n \n");
 	}
 	return data;
+}
+void FileDataProvider::PutData(float Fenh)
+{
+	std::ofstream fileIn(_OutputFilename);
+	if (!fileIn.is_open())
+	{
+		throw std::logic_error("Could not open file \n");
+	}
+	fileIn << Fenh;
 }
