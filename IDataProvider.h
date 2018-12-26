@@ -1,3 +1,6 @@
+/*
+*IDataProvider.h
+*/
 #pragma once
 #include <vector>
 #include <string>
@@ -6,27 +9,66 @@
 #include <iostream>
 #include <iterator>
 #include <sstream>
-
-struct Data//cС‚СЂСѓРєС‚СѓСЂР°, СЃРѕРґРµСЂР¶РёС‚ РІ СЃРµР±Рµ n(РєРѕР»РёС‡РµСЃС‚РІРѕ X Рё Y), РјР°СЃСЃРёРІС‹ Y Рё X
+/*
+*Структура содержащая входные данные (n(количество X и Y) и векторы Y и X)
+*/
+struct Data
 {
+	/*
+	*Количество X и Y(количество признаков)
+	*/
 	int n{};
+	/*
+	*Вектор для первых признаков(X)
+	*/
 	std::vector<int> MassX{};
+	/*
+	*Вектор для вторых признаков(Y)
+	*/
 	std::vector<int> MassY{};
 };
-class IDataProvider//РєР»Р°СЃСЃ РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹ РІС…РѕРґРЅС‹С… РґР°РЅРЅС‹С…
+/*
+*Интерфейс кототрый осуществляет получение и запись данных
+*/
+class IDataProvider
 {
 public:
+	/*
+	*Функция для чтения данных из файла
+	*/
 	virtual Data GetData() const = 0;
-	virtual ~IDataProvider() = default;
+	/*
+	*Функция для записи данных в файл
+	*/
+	virtual void PutData(float Fenh) = 0;
 };
-class FileDataProvider : public IDataProvider//С‡С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
+class FileDataProvider : public IDataProvider//чтение данных из файла
 {
 private:
-	std::string _filename;
-	std::vector<int> LineToVector(std::ifstream & fileIn) const;//СЃС‡РёС‚С‹РІР°РЅРёРµ СЃС‚СЂРѕРєРё РІ РІРµРєС‚РѕСЂ
+	/*
+	*Имя входного файла
+	*/
+	std::string _InputFilename;
+	/*
+	*Имя выходного файла 
+	*/
+	std::string _OutputFilename;
+	/*
+	*Вектор для записи данных из строки
+	*/
+	std::vector<int> LineToVector(std::ifstream & fileIn) const;
 public:
-	FileDataProvider(const std::string filename)
-		: _filename(filename) {};
-	Data GetData() const override;//С„СѓРЅРєС†РёСЏ РґР»СЏ С‡С‚РµРЅРёСЏ СЃ С„Р°Р№Р»Р°
-	
+	/*
+	*Конструктор принимает название входного и выходного файла
+	*/
+	FileDataProvider(const std::string& InputFilename, const std::string& OutputFilename)
+		: _InputFilename(InputFilename), _OutputFilename(OutputFilename) {};
+	/*
+	*Функция для чтения данных из файла
+	*/
+	Data GetData() const override;
+	/*
+	*Функция для записи данных в файл
+	*/
+	void PutData(float Fenh);
 };
