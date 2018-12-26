@@ -1,6 +1,6 @@
 /*
-*FileNameProvider.cpp
-*/
+ *FileNameProvider.cpp
+ */
 #include "FileNameProvider.h"
 
 std::string FileNameProvider::GetInputFileName() const

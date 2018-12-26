@@ -1,6 +1,6 @@
 /*
-*IDataProvider.cpp
-*/
+ *IDataProvider.cpp
+ */
 #include "IDataProvider.h"
 
 std::vector<int> FileDataProvider::LineToVector(std::ifstream & fileIn) const
@@ -18,9 +18,9 @@ Data FileDataProvider::GetData() const
 		throw std::logic_error("Could not open file \n");
 	}
 	Data data;
-	fileIn >> data.n; fileIn.ignore();//чтение n
-	data.MassX = LineToVector(fileIn);//чтение массива X
-	data.MassY = LineToVector(fileIn);//чтение массива Y
+	fileIn >> data.n; fileIn.ignore();
+	data.MassX = LineToVector(fileIn);
+	data.MassY = LineToVector(fileIn);
 	if (data.n != data.MassX.size() || data.n != data.MassY.size())
 	{
 		throw std::logic_error("The amount of data entered does not correspond to n \n");

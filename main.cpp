@@ -1,6 +1,6 @@
 /*
-*main.cpp
-*/
+ *main.cpp
+ */
 #include <iostream>
 #include "MassBas.h"
 #include "IDataProvider.h"

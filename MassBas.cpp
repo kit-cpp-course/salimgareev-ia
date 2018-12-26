@@ -1,6 +1,6 @@
 /*
-*MassBas.cpp
-*/
+ *MassBas.cpp
+ */
 #include "MassBas.h"
 
 namespace CorrelationCoefficients {
@@ -42,7 +42,10 @@ namespace CorrelationCoefficients {
 		float MassBas::CalculationFehner()
 		{
 			CountSign();
-			Fenh = float(nA - nB) / float(nA + nB);//С„РѕСЂРјСѓР»СЏ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РєРѕСЌС„С„РёС†РёРµРЅС‚Р°
+			/*
+			*формуля для вычисления коэффициента
+			*/
+			Fenh = float(nA - nB) / float(nA + nB);
 			
 			return(Fenh);
 		}
