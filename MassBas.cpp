@@ -9,44 +9,60 @@ namespace CorrelationCoefficients {
 		MassSignX = new char[data.n];
 		MassSignY = new char[data.n];
 	}
-		float MassBas::AveVal(std::vector<int> Mass) const 
+	MassBas::~MassBas()
+	{
+		delete[] MassSignX;
+		delete[] MassSignY;
+	}
+	MassBas::MassBas(const MassBas& source) : dataProvider(source.dataProvider)
+	{
+		data = source.data;
+		MassSignX = new char[data.n];
+		MassSignY = new char[data.n];
+		for (int i = 0; i < data.n;i++)
 		{
-			int Summ = 0;
-			for (int i = 0; i < data.n;i++) 
-			{
-				Summ += Mass[i];
-			}
-			return Summ / data.n;
+			MassSignX[i] = source.MassSignX[i];
+			MassSignY[i] = source.MassSignY[i];
 		}
-		char *MassBas::DefinitionSign(std::vector<int> Mass, char *MassSign) 
+	}
+	float MassBas::AveVal(std::vector<int> Mass) const
+	{
+		int Summ = 0;
+		for (int i = 0; i < data.n;i++)
 		{
-			float AveValue = AveVal(Mass);
-			for (int i = 0; i < data.n; i++)
-			{
-				MassSign[i] = (Mass[i] - AveValue > 0) ? '+' : '-';
-			}
-			return MassSign;
+			Summ += Mass[i];
 		}
-		int MassBas::CountSign() 
+		return Summ / data.n;
+	}
+	char *MassBas::DefinitionSign(std::vector<int> Mass, char *MassSign)
+	{
+		float AveValue = AveVal(Mass);
+		for (int i = 0; i < data.n; i++)
 		{
-			nA = 0;
-			nB = 0;
-			MassSignX = DefinitionSign(data.MassX, MassSignX);
-			MassSignY = DefinitionSign(data.MassY, MassSignY);
-			for (int i = 0;i < data.n;i++)
-			{
-				(MassSignX[i] == MassSignY[i] ? nA : nB)++;
-			}
-			return 0;
+			MassSign[i] = (Mass[i] - AveValue > 0) ? '+' : '-';
 		}
-		float MassBas::CalculationFehner()
+		return MassSign;
+	}
+	int MassBas::CountSign()
+	{
+		nA = 0;
+		nB = 0;
+		MassSignX = DefinitionSign(data.MassX, MassSignX);
+		MassSignY = DefinitionSign(data.MassY, MassSignY);
+		for (int i = 0;i < data.n;i++)
 		{
-			CountSign();
-			/*
-			*формуля для вычисления коэффициента
-			*/
-			Fenh = float(nA - nB) / float(nA + nB);
-			
-			return(Fenh);
+			(MassSignX[i] == MassSignY[i] ? nA : nB)++;
 		}
+		return 0;
+	}
+	float MassBas::CalculationFehner()
+	{
+		CountSign();
+		/*
+		*формуля для вычисления коэффициента
+		*/
+		Fenh = float(nA - nB) / float(nA + nB);
+
+		return(Fenh);
+	}
 }

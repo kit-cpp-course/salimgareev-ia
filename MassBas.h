@@ -55,7 +55,11 @@ namespace CorrelationCoefficients{
 		/*
 		 *Деструктор
 		 */
-		~MassBas() = default;
+		~MassBas();
+		/*
+		*Конструктор копирования 
+		*/
+		MassBas(const MassBas& source);
 		/*
 		 *Функция для вычисления коэффициента Фехнера
 		 */
